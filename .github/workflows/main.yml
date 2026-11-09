@@ -1,0 +1,31 @@
+name: Stats
+
+on: 
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+      - uses: actions/checkout@v4
+
+      - name: Setup python
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      -  name: Run script
+      - run: python ./Roadmap/stats.py
+
+      - name: commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with: 
+          commit_message: Update stats
+          commit_user_name: Leandro Maciel [ GitHub Actions ]
+          commit_user_email: leanmaci810@gmail.com
+          commit_author: leandevz
